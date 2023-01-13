@@ -9,8 +9,10 @@ public class IndexController {
 
     @GetMapping("/lista")
     public ModelAndView getList(){
+
         ModelAndView mv = new ModelAndView("index");
         return mv;
+
     }
 
 }
