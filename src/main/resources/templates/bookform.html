@@ -1,15 +1,31 @@
-
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
 <div th:if="${mensagem}" th:text="${mensagem}"></div>
 
 <form action="/book/form/save" method="POST">
-    Nome: <input type="text" id="name" name="name" />
 
-    Author: <select name="author">
-        <option th:each="author : ${authorlist}"
+    <div th:if="${book}">
+        <input type="text" readonly id="id" name="id" th:value="${book?.id}"
+        />
+    </div>
+    <input type="text" class="form-control" id="name" name="name"
+           th:value="${book?.name}"
+    />
+
+    <select name="author" class="custom-select">
+        <option th:each="author : ${authorList}"
                 th:value="${author.id}"
-                th:text="${author.name}"></option>
+                th:text="${author.name}"
+                th:selected="${author.id} == ${book?.author?.id}"></option>
 
-
-</select>
-    <button type="submit">Salvar Livro</button>
+    </select>
+    <br/>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+</body>
+</html>

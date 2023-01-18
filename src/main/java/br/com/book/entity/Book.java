@@ -2,17 +2,18 @@ package br.com.book.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-import org.hibernate.Hibernate;
-import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
 @Table(name = "book")
 @Entity(name = "book")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -27,20 +28,8 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Book book = (Book) o;
-        return id != null && Objects.equals(id, book.id);
-
-    }
-
-    @Override
-    public int hashCode() {
-
-        return getClass().hashCode();
-
+    public Book(String name, Author author){
+        this.name = name;
+        this.author = author;
     }
 }
